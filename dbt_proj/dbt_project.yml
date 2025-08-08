@@ -1,0 +1,63 @@
+name: 'dbt_proj'
+version: '1.0.0'
+config-version: 2
+
+profile: 'dbt_proj'  
+
+
+model-paths:
+  - "models"
+seed-paths:
+  - "seeds"
+test-paths:
+  - "tests"
+macro-paths:
+  - "macros"
+snapshot-paths:
+  - "snapshots"
+analysis-paths:
+  - "analyses"
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_modules"
+
+models:
+  dbt_proj:
+    staging:
+      +materialized: view
+      +tags:
+        - staging
+
+    marts:
+      +materialized: table
+      +tags:
+        - marts
+
+    core:
+      +materialized: incremental
+      +incremental_strategy: merge
+      +unique_key: id
+      +tags:
+        - core
+
+seeds:
+  dbt_proj:
+    +enabled: true
+    country_codes:
+      +quote_columns: false
+      +schema: seed_data
+      +tags:
+        - seed
+
+tests:
+  dbt_proj:
+    +severity: warn
+    +store_failures: true
+    +tags:
+      - test
+
+vars:
+  currency: 'USD'
+  start_date: '2025-07-22'

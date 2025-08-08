@@ -1,0 +1,13 @@
+version: 2
+
+seeds:
+  - name: country_codes
+    columns:
+      - name: country_code
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: ['US', 'CA', 'MX', 'GB', 'DE', 'FR', 'JP']
+
+

@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Master customer dimension table"
+    config:
+      materialized: table
+      tags: ['marts']
+      # Databricks-specific config:
+      partition_by:  ['customer_since_month'] 
+      file_format: "delta"
+    
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+      - name: lifetime_value
+        description: "Total spend from customer"
+        tests:
+          - not_null

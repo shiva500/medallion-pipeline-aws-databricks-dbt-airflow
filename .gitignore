@@ -1,0 +1,78 @@
+# =========================
+# OS / Editors
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+dist/
+build/
+.myvenv/
+myvenv/
+# local env files
+.env
+*.env
+
+# =========================
+# Airflow / Astro
+# =========================
+# Airflow runtime logs
+logs/
+# Astro cache/build output; keep config.yaml
+.astro/
+!.astro/config.yaml
+
+# If airflow_settings.yaml contains connections/secrets, ignore it
+# (If sanitized, you may keep it tracked instead)
+airflow_settings.yaml
+
+# =========================
+# dbt
+# =========================
+# dbt artifacts
+dbt_proj/target/
+dbt_proj/logs/
+# dbt packages folder (if using packages.yml)
+dbt_packages/
+dbt_modules/
+# Local user profiles (often contains Snowflake creds)
+.dbt/
+# keep a template instead of real profile
+!.dbt/profiles.example.yml
+!.dbt/README.md
+
+# =========================
+# Notebooks
+# =========================
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# =========================
+# Tests / Coverage
+# =========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# =========================
+# Keys / Certs (safety)
+# =========================
+*.pem
+*.key
+*.der
+*.p12
+*.creds

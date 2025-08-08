@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+  - name: ecommerce_raw
+    description: "Raw data from ecommerce platform"
+    database: dbt_catalog  # Replace with your DB name
+    schema: dbt_schema
+
+    tables:
+      - name: customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: email
+            tests:
+              - not_null
+
+      - name: orders
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            tests:
+              - relationships:
+                  to: ref('stg_customers')
+                  field: customer_id
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['pending', 'shipped', 'delivered', 'returned']
+          - name: amount
+            tests:
+              - not_null
